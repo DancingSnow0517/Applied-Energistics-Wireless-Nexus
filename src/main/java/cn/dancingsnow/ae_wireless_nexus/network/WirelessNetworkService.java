@@ -97,12 +97,7 @@ public final class WirelessNetworkService {
 
         WirelessNetworkSavedData data = WirelessNetworkSavedData.get(world);
         if (data == null) return;
-        WirelessNetworkRecord oldRecord = data.get(oldId);
-        if (oldRecord != null) {
-            oldRecord.setOnline(false);
-            oldRecord.setTotalChannels(0);
-            oldRecord.setAllocatedChannels(0);
-        }
+        data.remove(oldId);
         for (List<TileController> component : components) updateGroup(component, data, world);
         data.markDirty();
         allocateLeases(world);
@@ -133,8 +128,11 @@ public final class WirelessNetworkService {
             TileWirelessController controller = findController(record);
             if (controller != null && hasPermission(controller, player)) visible.add(record);
         }
-        visible.sort(Comparator.comparing(WirelessNetworkRecord::getName)
-            .thenComparing(record -> record.getId().toString()));
+        visible.sort(
+            Comparator.comparing(WirelessNetworkRecord::getName)
+                .thenComparing(
+                    record -> record.getId()
+                        .toString()));
         return visible;
     }
 
@@ -246,10 +244,8 @@ public final class WirelessNetworkService {
         World targetWorld = DimensionManager.getWorld(record.getDimension());
         if (targetWorld == null || !targetWorld.blockExists(record.getX(), record.getY(), record.getZ())) return null;
         TileEntity tile = targetWorld.getTileEntity(record.getX(), record.getY(), record.getZ());
-        if (!(tile instanceof TileWirelessController)) return null;
-        TileWirelessController controller = (TileWirelessController) tile;
-        return record.getId()
-            .equals(controller.getNetworkId()) ? controller : null;
+        if (!(tile instanceof TileWirelessController controller)) return null;
+        return record.getId().equals(controller.getNetworkId()) ? controller : null;
     }
 
     public static int scanCapacity(TileWirelessController controller) {

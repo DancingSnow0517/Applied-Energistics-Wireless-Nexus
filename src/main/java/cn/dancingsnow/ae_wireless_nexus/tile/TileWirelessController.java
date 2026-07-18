@@ -87,7 +87,7 @@ public class TileWirelessController extends TileController implements IGuiHolder
                     .full()
                     .padding(8)
                     .childPadding(6)
-                    .child(new TextWidget(IKey.lang("gui.ae_wireless_nexus.controller.title")))
+                    .child(new TextWidget<>(IKey.lang("gui.ae_wireless_nexus.controller.title")))
                     .child(
                         new TextFieldWidget().value(name)
                             .setMaxLength(64)
@@ -95,17 +95,17 @@ public class TileWirelessController extends TileController implements IGuiHolder
                             .widthRel(1F)
                             .height(16))
                     .child(
-                        new TextWidget(
+                        new TextWidget<>(
                             IKey.lang(
                                 "gui.ae_wireless_nexus.channels.total",
                                 () -> new Object[] { total.getIntValue() })))
                     .child(
-                        new TextWidget(
+                        new TextWidget<>(
                             IKey.lang(
                                 "gui.ae_wireless_nexus.channels.allocated",
                                 () -> new Object[] { allocated.getIntValue() })))
                     .child(
-                        new TextWidget(
+                        new TextWidget<>(
                             IKey.lang(
                                 "gui.ae_wireless_nexus.channels.available",
                                 () -> new Object[] { available.getIntValue() }))));
@@ -122,14 +122,11 @@ public class TileWirelessController extends TileController implements IGuiHolder
         WirelessNetworkSavedData savedData = WirelessNetworkSavedData.get(worldObj);
         WirelessNetworkRecord record = savedData == null ? null : savedData.get(networkId);
         if (record == null) return 0;
-        switch (value) {
-            case TOTAL:
-                return record.getTotalChannels();
-            case ALLOCATED:
-                return record.getAllocatedChannels();
-            default:
-                return Math.max(0, record.getTotalChannels() - record.getAllocatedChannels());
-        }
+        return switch (value) {
+            case TOTAL -> record.getTotalChannels();
+            case ALLOCATED -> record.getAllocatedChannels();
+            default -> Math.max(0, record.getTotalChannels() - record.getAllocatedChannels());
+        };
     }
 
     private enum Value {
