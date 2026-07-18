@@ -245,7 +245,8 @@ public final class WirelessNetworkService {
         if (targetWorld == null || !targetWorld.blockExists(record.getX(), record.getY(), record.getZ())) return null;
         TileEntity tile = targetWorld.getTileEntity(record.getX(), record.getY(), record.getZ());
         if (!(tile instanceof TileWirelessController controller)) return null;
-        return record.getId().equals(controller.getNetworkId()) ? controller : null;
+        return record.getId()
+            .equals(controller.getNetworkId()) ? controller : null;
     }
 
     public static int scanCapacity(TileWirelessController controller) {
