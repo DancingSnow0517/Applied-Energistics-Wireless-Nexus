@@ -3,6 +3,10 @@ plugins {
     id("com.gtnewhorizons.gtnhconvention")
 }
 
+if (file("addon.gradle").exists()) {
+    apply(from = "addon.gradle")
+}
+
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
