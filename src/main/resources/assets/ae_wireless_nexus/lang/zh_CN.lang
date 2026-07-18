@@ -1,0 +1,17 @@
+tile.wireless_controller.name=ME无线网络控制器
+tile.wireless_connector.name=ME无线连接器
+itemGroup.ae_wireless_nexus=AE无线枢纽
+gui.ae_wireless_nexus.controller.title=无线网络控制器
+gui.ae_wireless_nexus.network_selector.title=可用无线网络
+gui.ae_wireless_nexus.priority=优先级
+gui.ae_wireless_nexus.disconnect=断开
+gui.ae_wireless_nexus.open_selector=无线网络
+gui.ae_wireless_nexus.channels.total=无线频道：%s
+gui.ae_wireless_nexus.channels.allocated=已分配频道：%s
+gui.ae_wireless_nexus.channels.available=可用频道：%s
+gui.ae_wireless_nexus.status.unbound=未绑定
+gui.ae_wireless_nexus.status.target_offline=目标离线
+gui.ae_wireless_nexus.status.no_permission=无权限
+gui.ae_wireless_nexus.status.capacity_exhausted=频道容量不足
+gui.ae_wireless_nexus.status.connecting=正在连接
+gui.ae_wireless_nexus.status.connected=已连接

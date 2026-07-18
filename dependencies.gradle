@@ -37,6 +37,11 @@ dependencies {
     api(gtnh290.GT5Unofficial) { artifact { classifier = "dev" } }
     api(gtnh290.newHorizonsCoreMod) { artifact { classifier = "dev" } }
     api(gtnh290.appliedEnergistics2Unofficial) { artifact { classifier = "dev" } }
+    // AE2's power tile hierarchy exposes optional Mekanism and RotaryCraft API types.
+    // Keep the same 1.7.10 compile-only artifacts used by AE2 itself so these APIs are
+    // never bundled into this addon.
+    compileOnly(rfg.deobf("curse.maven:mekanism-268560:2475797"))
+    compileOnly("curse.maven:rotarycraft-235596:4721191")
 
     runtimeOnlyNonPublishable(gtnh290.angelica) { artifact { classifier = "dev" } }
 

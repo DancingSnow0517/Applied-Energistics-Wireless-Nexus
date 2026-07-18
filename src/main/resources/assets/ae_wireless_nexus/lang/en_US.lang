@@ -1,0 +1,17 @@
+tile.wireless_controller.name=ME Wireless Network Controller
+tile.wireless_connector.name=ME Wireless Connector
+itemGroup.ae_wireless_nexus=AE Wireless Nexus
+gui.ae_wireless_nexus.controller.title=Wireless Network Controller
+gui.ae_wireless_nexus.network_selector.title=Available Wireless Networks
+gui.ae_wireless_nexus.priority=Priority
+gui.ae_wireless_nexus.disconnect=Disconnect
+gui.ae_wireless_nexus.open_selector=Wireless network
+gui.ae_wireless_nexus.channels.total=Wireless channels: %s
+gui.ae_wireless_nexus.channels.allocated=Allocated channels: %s
+gui.ae_wireless_nexus.channels.available=Available channels: %s
+gui.ae_wireless_nexus.status.unbound=Unbound
+gui.ae_wireless_nexus.status.target_offline=Target offline
+gui.ae_wireless_nexus.status.no_permission=No permission
+gui.ae_wireless_nexus.status.capacity_exhausted=Insufficient capacity
+gui.ae_wireless_nexus.status.connecting=Connecting
+gui.ae_wireless_nexus.status.connected=Connected

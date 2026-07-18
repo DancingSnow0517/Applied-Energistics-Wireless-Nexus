@@ -1,5 +1,8 @@
 package cn.dancingsnow.ae_wireless_nexus;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,13 +13,27 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = AEWirelessNexus.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
+@Mod(
+    modid = AEWirelessNexus.MODID,
+    version = Tags.VERSION,
+    name = "Applied Energistics: Wireless Nexus",
+    acceptedMinecraftVersions = "[1.7.10]",
+    dependencies = "required-after:appliedenergistics2")
 public class AEWirelessNexus {
 
     public static final String MODID = "ae_wireless_nexus";
     public static final Logger LOG = LogManager.getLogger(MODID);
+    public static final CreativeTabs CREATIVE_TAB = new CreativeTabs(MODID) {
 
-    @SidedProxy(clientSide = "cn.dancingsnow.ae_wireless_nexus.ClientProxy", serverSide = "cn.dancingsnow.ae_wireless_nexus.CommonProxy")
+        @Override
+        public Item getTabIconItem() {
+            return Item.getItemFromBlock(cn.dancingsnow.ae_wireless_nexus.registry.ModBlocks.WIRELESS_CONTROLLER);
+        }
+    };
+
+    @SidedProxy(
+        clientSide = "cn.dancingsnow.ae_wireless_nexus.ClientProxy",
+        serverSide = "cn.dancingsnow.ae_wireless_nexus.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
