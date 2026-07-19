@@ -22,6 +22,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 public class AEWirelessNexus {
 
     public static final String MODID = "ae_wireless_nexus";
+    public static final String GUI_THEME = "gregtech:standard";
     public static final Logger LOG = LogManager.getLogger(MODID);
     public static final CreativeTabs CREATIVE_TAB = new CreativeTabs(MODID) {
 

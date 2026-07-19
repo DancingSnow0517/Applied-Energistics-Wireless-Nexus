@@ -28,7 +28,7 @@ public final class GTWirelessUI {
             "ae_wireless_nexus_selector",
             true,
             (childSyncManager, handler) -> WirelessSelectionPanel
-                .build("gt_wireless_selector", endpoint, syncManager.getPlayer(), childSyncManager));
+                .build("gt_wireless_selector", endpoint, syncManager.getPlayer(), childSyncManager, true));
         InteractionSyncHandler open = new InteractionSyncHandler().setOnMousePressed(mouse -> selector.openPanel());
         ButtonWidget<?> button = new ButtonWidget<>().size(18)
             .syncHandler(open)

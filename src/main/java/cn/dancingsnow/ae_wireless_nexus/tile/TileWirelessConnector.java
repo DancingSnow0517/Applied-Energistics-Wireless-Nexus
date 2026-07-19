@@ -206,7 +206,8 @@ public class TileWirelessConnector extends AENetworkTile implements IGuiHolder<P
 
     @Override
     public ModularPanel buildUI(PosGuiData data, PanelSyncManager syncManager, UISettings settings) {
-        return WirelessSelectionPanel.build("wireless_connector", this, data.getPlayer(), syncManager);
+        settings.useTheme(AEWirelessNexus.GUI_THEME);
+        return WirelessSelectionPanel.build("wireless_connector", this, data.getPlayer(), syncManager, false);
     }
 
     @Override

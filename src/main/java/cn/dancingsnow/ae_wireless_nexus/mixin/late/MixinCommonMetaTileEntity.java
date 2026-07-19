@@ -10,6 +10,7 @@ import com.cleanroommc.modularui.screen.ModularPanel;
 import com.cleanroommc.modularui.screen.UISettings;
 import com.cleanroommc.modularui.value.sync.PanelSyncManager;
 
+import cn.dancingsnow.ae_wireless_nexus.AEWirelessNexus;
 import cn.dancingsnow.ae_wireless_nexus.gui.WirelessSelectionPanel;
 import cn.dancingsnow.ae_wireless_nexus.integration.gregtech.GTWirelessEndpoint;
 import cn.dancingsnow.ae_wireless_nexus.integration.gregtech.IGTWirelessHost;
@@ -26,11 +27,13 @@ public abstract class MixinCommonMetaTileEntity {
         CommonMetaTileEntity mte = (CommonMetaTileEntity) (Object) this;
         IGregTechTileEntity base = mte.getBaseMetaTileEntity();
         if (!GTWirelessEndpoint.isEligible(base) || !(base instanceof IGTWirelessHost)) return;
+        settings.useTheme(AEWirelessNexus.GUI_THEME);
         cir.setReturnValue(
             WirelessSelectionPanel.build(
                 "gt_wireless_selector",
                 ((IGTWirelessHost) base).aeWirelessNexus$getWirelessEndpoint(),
                 data.getPlayer(),
-                syncManager));
+                syncManager,
+                false));
     }
 }
