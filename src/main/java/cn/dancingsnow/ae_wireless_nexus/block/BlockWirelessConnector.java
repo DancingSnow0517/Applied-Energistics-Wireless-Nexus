@@ -50,6 +50,6 @@ public class BlockWirelessConnector extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
-        this.blockIcon = register.registerIcon("appliedenergistics2:BlockSpatialNetworkRelayConnected");
+        this.blockIcon = register.registerIcon("ae_wireless_nexus:BlockWirelessConnecter");
     }
 }
