@@ -15,6 +15,9 @@ For compatible hatches with a ModularUI2 screen, a wireless-network button appea
 Its connector icon opens the same selector used by the [ME Wireless Connector](wireless_connector.md). Compatible
 hatches without their own machine UI open the selector directly when right-clicked.
 
+A [Wireless Kit](wireless_kit.md) can bind a compatible hatch directly without opening its GUI. A newly placed hatch is
+also bound automatically when the selected kit is in the Backhand offhand slot.
+
 ## Channels
 
 Wireless connection does not change how many channels the hatch normally requires or can carry. The wireless

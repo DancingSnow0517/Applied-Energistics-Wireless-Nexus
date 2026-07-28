@@ -15,8 +15,17 @@ compatible GregTech ME hatches can then join that network without a cable path b
 Wireless links still follow AE channel rules. They do not make every connected cable dense and they do not grant
 access to players who cannot build on the target ME network.
 
+## Core Components
+
+<ItemGrid>
+  <ItemIcon id="ae_wireless_nexus:wireless_controller" />
+  <ItemIcon id="ae_wireless_nexus:wireless_connector" />
+  <ItemIcon id="appliedenergistics2:item.ToolWirelessKit" />
+</ItemGrid>
+
 * [ME Wireless Network Controller](wireless_controller.md)
+* [Wireless Kit](wireless_kit.md)
 * [ME Wireless Connector](wireless_connector.md)
 * [GregTech ME Hatches](gregtech_hatches.md)
 
-Recipes are not registered yet. The blocks are currently available from the Wireless Nexus creative tab for testing.
+The controller and connector pages show their currently enabled recipes.

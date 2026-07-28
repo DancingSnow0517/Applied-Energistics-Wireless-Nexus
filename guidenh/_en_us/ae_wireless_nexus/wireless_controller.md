@@ -28,6 +28,16 @@ non-ASCII text. The UUID remains the internal identity, so renaming a network do
 
 The screen also shows the total, allocated, and available wireless channels.
 
+As a direct alternative to opening the screen, right-click the controller with a [Wireless Kit](wireless_kit.md) to
+store this network on the tool.
+
+## Recipe
+
+<RecipeFor
+  id="ae_wireless_nexus:wireless_controller"
+  fallbackText="No enabled assembly-line recipe was found."
+/>
+
 ## Wireless Channel Capacity
 
 Every exposed face of every controller block in the connected multiblock can contribute 32 wireless channels. Capacity

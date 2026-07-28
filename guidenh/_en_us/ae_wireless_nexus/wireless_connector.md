@@ -19,6 +19,16 @@ The network list follows the target AE network's Security Terminal. A player mus
 select that network. The permission is checked again while allocating the connection, so losing access disconnects the
 endpoint.
 
+A [Wireless Kit](wireless_kit.md) can bind the connector directly without opening the selector, or bind it automatically
+when the connector is placed while the bound kit is in the Backhand offhand slot.
+
+## Recipe
+
+<RecipeFor
+  id="ae_wireless_nexus:wireless_connector"
+  fallbackText="No enabled crafting recipe was found."
+/>
+
 ## Channel Behavior
 
 The connector supports up to 32 channels on its wireless link. It reserves only the number of channels actually used
