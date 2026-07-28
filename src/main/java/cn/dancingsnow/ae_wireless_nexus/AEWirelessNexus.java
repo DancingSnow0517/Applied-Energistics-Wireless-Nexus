@@ -18,7 +18,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     version = Tags.VERSION,
     name = "Applied Energistics: Wireless Nexus",
     acceptedMinecraftVersions = "[1.7.10]",
-    dependencies = "required-after:appliedenergistics2")
+    dependencies = "required-after:appliedenergistics2;required-after:backhand")
 public class AEWirelessNexus {
 
     public static final String MODID = "ae_wireless_nexus";

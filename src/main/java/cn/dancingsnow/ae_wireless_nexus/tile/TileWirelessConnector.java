@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -112,6 +114,11 @@ public class TileWirelessConnector extends AENetworkTile implements IGuiHolder<P
     @Override
     public World getEndpointWorld() {
         return worldObj;
+    }
+
+    @Override
+    public IChatComponent getEndpointDisplayName() {
+        return new ChatComponentTranslation("tile.wireless_connector.name");
     }
 
     public void openSelection(EntityPlayer player) {

@@ -344,7 +344,8 @@ public final class WirelessNetworkService {
         }
     }
 
-    private static boolean hasPermission(TileWirelessController controller, EntityPlayer player) {
+    public static boolean hasPermission(TileWirelessController controller, EntityPlayer player) {
+        if (controller == null || player == null) return false;
         try {
             return controller.getProxy()
                 .getSecurity()

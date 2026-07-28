@@ -16,6 +16,7 @@ public enum Mixins implements IMixins {
         .addCommonMixins(
             "MixinBaseMetaTileEntity",
             "MixinCommonMetaTileEntity",
+            "MixinItemMachines",
             "MixinMTEHatchInputBusMEGui",
             "MixinMTETieredMachineBlockBaseGui"));
 

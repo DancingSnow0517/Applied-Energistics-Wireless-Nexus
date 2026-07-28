@@ -12,6 +12,7 @@ import appeng.block.networking.BlockController;
 import cn.dancingsnow.ae_wireless_nexus.AEWirelessNexus;
 import cn.dancingsnow.ae_wireless_nexus.client.render.RenderBlockWirelessController;
 import cn.dancingsnow.ae_wireless_nexus.network.WirelessNetworkService;
+import cn.dancingsnow.ae_wireless_nexus.network.WirelessNetworkToolBinding;
 import cn.dancingsnow.ae_wireless_nexus.tile.TileWirelessController;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -85,6 +86,13 @@ public class BlockWirelessController extends BlockController {
         float hitZ) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if (!(tile instanceof TileWirelessController)) return false;
+        ItemStack heldItem = player.getHeldItem();
+        if (WirelessNetworkToolBinding.isWirelessKit(heldItem)) {
+            if (!world.isRemote) {
+                WirelessNetworkToolBinding.selectNetwork(heldItem, (TileWirelessController) tile, player);
+            }
+            return true;
+        }
         if (!world.isRemote) {
             ((TileWirelessController) tile).openConfiguration(player);
         }

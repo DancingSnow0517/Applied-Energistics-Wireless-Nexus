@@ -3,14 +3,18 @@ package cn.dancingsnow.ae_wireless_nexus.block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import cn.dancingsnow.ae_wireless_nexus.AEWirelessNexus;
+import cn.dancingsnow.ae_wireless_nexus.network.WirelessNetworkToolBinding;
 import cn.dancingsnow.ae_wireless_nexus.tile.TileWirelessConnector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import xonin.backhand.api.core.BackhandUtils;
 
 public class BlockWirelessConnector extends BlockContainer {
 
@@ -32,10 +36,27 @@ public class BlockWirelessConnector extends BlockContainer {
         float hitY, float hitZ) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if (!(tile instanceof TileWirelessConnector)) return false;
+        ItemStack heldItem = player.getHeldItem();
+        if (WirelessNetworkToolBinding.hasBinding(heldItem)) {
+            if (!world.isRemote) {
+                WirelessNetworkToolBinding.bindConnector(heldItem, (TileWirelessConnector) tile, player);
+            }
+            return true;
+        }
         if (!world.isRemote) {
             ((TileWirelessConnector) tile).openSelection(player);
         }
         return true;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(world, x, y, z, placer, stack);
+        if (world.isRemote || !(placer instanceof EntityPlayer player)) return;
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof TileWirelessConnector connector) {
+            WirelessNetworkToolBinding.bindConnector(BackhandUtils.getOffhandItem(player), connector, player);
+        }
     }
 
     @Override

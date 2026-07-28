@@ -22,3 +22,7 @@ gui.ae_wireless_nexus.status.no_permission=No permission
 gui.ae_wireless_nexus.status.capacity_exhausted=Insufficient capacity
 gui.ae_wireless_nexus.status.connecting=Connecting
 gui.ae_wireless_nexus.status.connected=Connected
+tooltip.ae_wireless_nexus.wireless_kit.bound_network=Wireless network: %s
+message.ae_wireless_nexus.wireless_kit.selected=Selected wireless network: %s
+message.ae_wireless_nexus.wireless_kit.connected=%s bound to: %s
+message.ae_wireless_nexus.wireless_kit.no_permission=No permission for wireless network: %s

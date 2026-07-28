@@ -1,6 +1,7 @@
 package cn.dancingsnow.ae_wireless_nexus.mixin.late;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import cn.dancingsnow.ae_wireless_nexus.integration.gregtech.GTWirelessEndpoint;
 import cn.dancingsnow.ae_wireless_nexus.integration.gregtech.IGTWirelessHost;
+import cn.dancingsnow.ae_wireless_nexus.network.WirelessNetworkToolBinding;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.BaseMetaTileEntity;
 import gregtech.api.modularui2.MetaTileEntityGuiHandler;
@@ -61,6 +63,19 @@ public abstract class MixinBaseMetaTileEntity implements IGTWirelessHost {
     @Inject(method = "onUnload", at = @At("HEAD"), remap = false)
     private void aeWirelessNexus$unloadWirelessEndpoint(CallbackInfo ci) {
         if (aeWirelessNexus$endpoint != null) aeWirelessNexus$endpoint.unload();
+    }
+
+    @Inject(method = "onRightclick", at = @At("HEAD"), cancellable = true, remap = false)
+    private void aeWirelessNexus$bindWithWirelessKit(EntityPlayer aPlayer, ForgeDirection side, float aX, float aY,
+        float aZ, CallbackInfoReturnable<Boolean> cir) {
+        IGregTechTileEntity base = (IGregTechTileEntity) (Object) this;
+        ItemStack heldItem = aPlayer.getHeldItem();
+        if (!GTWirelessEndpoint.isEligible(base) || !WirelessNetworkToolBinding.hasBinding(heldItem)) return;
+
+        if (base.isServerSide()) {
+            WirelessNetworkToolBinding.bindConnector(heldItem, aeWirelessNexus$getWirelessEndpoint(), aPlayer);
+        }
+        cir.setReturnValue(true);
     }
 
     @Inject(method = "onRightclick", at = @At("RETURN"), cancellable = true, remap = false)

@@ -3,11 +3,14 @@ package cn.dancingsnow.ae_wireless_nexus.network;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public interface WirelessBindableEndpoint extends WirelessEndpoint {
 
     World getEndpointWorld();
+
+    IChatComponent getEndpointDisplayName();
 
     WirelessLeaseStatus getWirelessLeaseStatus();
 

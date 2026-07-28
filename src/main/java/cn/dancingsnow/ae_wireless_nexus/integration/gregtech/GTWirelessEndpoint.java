@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 import appeng.api.AEApi;
@@ -93,6 +95,13 @@ public final class GTWirelessEndpoint implements WirelessBindableEndpoint {
     @Override
     public World getEndpointWorld() {
         return base.getWorld();
+    }
+
+    @Override
+    public IChatComponent getEndpointDisplayName() {
+        return new ChatComponentTranslation(
+            base.getMetaTileEntity()
+                .getLocalNameKey());
     }
 
     @Override

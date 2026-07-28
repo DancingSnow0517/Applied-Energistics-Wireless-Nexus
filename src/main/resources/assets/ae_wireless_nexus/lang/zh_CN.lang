@@ -22,3 +22,7 @@ gui.ae_wireless_nexus.status.no_permission=无权限
 gui.ae_wireless_nexus.status.capacity_exhausted=频道容量不足
 gui.ae_wireless_nexus.status.connecting=正在连接
 gui.ae_wireless_nexus.status.connected=已连接
+tooltip.ae_wireless_nexus.wireless_kit.bound_network=无线网络：%s
+message.ae_wireless_nexus.wireless_kit.selected=已选择无线网络：%s
+message.ae_wireless_nexus.wireless_kit.connected=%s已绑定至：%s
+message.ae_wireless_nexus.wireless_kit.no_permission=没有无线网络权限：%s
