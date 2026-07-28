@@ -38,6 +38,10 @@ dependencies {
     api(gtnh290.newHorizonsCoreMod) { artifact { classifier = "dev" } }
     api(gtnh290.appliedEnergistics2Unofficial) { artifact { classifier = "dev" } }
     api(gtnh290.backhand) { artifact { classifier = "dev" } }
+
+    devOnlyNonPublishable("cn.dancingsnow.appeu:appeu:1.0.1:dev")
+    testImplementation("cn.dancingsnow.appeu:appeu:1.0.1:dev")
+
     // AE2's power tile hierarchy exposes optional Mekanism and RotaryCraft API types.
     // Keep the same 1.7.10 compile-only artifacts used by AE2 itself so these APIs are
     // never bundled into this addon.

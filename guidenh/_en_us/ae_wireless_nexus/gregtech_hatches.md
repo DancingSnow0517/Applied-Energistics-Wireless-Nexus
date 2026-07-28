@@ -11,6 +11,22 @@ navigation:
 A GregTech machine gains wireless network selection only when its MetaTileEntity is both an `MTEHatch` and an AE grid
 host implementing `IGridProxyable`. Ordinary GregTech machines and non-AE hatches are not changed.
 
+## AppEU Compatibility
+
+The following ME energy hatches from Applied Energistics EU Network (AppEU) can act as wireless endpoints:
+
+* 2A ME Energy Hatches and ME Dynamo Hatches;
+* 4A, 16A, and 64A ME Energy Hatches and ME Dynamo Hatches;
+* ME Laser Target Hatches and ME Laser Source Hatches at 256A and above.
+
+These hatches support the network selector below, direct main-hand Wireless Kit binding, and automatic placement
+binding with the kit in the Backhand offhand slot. The wireless link replaces only the cable path to the target ME
+network; it does not change AppEU voltage, amperage, EU buffering, or transfer cadence.
+
+Standard and multi-amp AppEU hatches have no item inventory, so right-clicking them opens the wireless network selector
+directly. ME Laser Target Hatches and ME Laser Source Hatches keep their dedicated screen and open the selector from
+the wireless-network button in its bottom-right controls.
+
 For compatible hatches with a ModularUI2 screen, a wireless-network button appears in the bottom-right control flow.
 Its connector icon opens the same selector used by the [ME Wireless Connector](wireless_connector.md). Compatible
 hatches without their own machine UI open the selector directly when right-clicked.

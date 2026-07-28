@@ -40,7 +40,11 @@ public final class GTWirelessEndpoint implements WirelessBindableEndpoint {
     public static boolean isEligible(IGregTechTileEntity base) {
         if (base == null || !base.canAccessData()) return false;
         IMetaTileEntity mte = base.getMetaTileEntity();
-        return mte instanceof MTEHatch && mte instanceof IGridProxyable;
+        return mte != null && isEligibleMetaTileEntityType(mte.getClass());
+    }
+
+    static boolean isEligibleMetaTileEntityType(Class<?> type) {
+        return type != null && MTEHatch.class.isAssignableFrom(type) && IGridProxyable.class.isAssignableFrom(type);
     }
 
     @Override

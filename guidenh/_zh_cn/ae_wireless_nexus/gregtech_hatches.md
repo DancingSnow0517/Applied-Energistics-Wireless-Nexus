@@ -11,6 +11,20 @@ navigation:
 只有 MetaTileEntity 同时属于 `MTEHatch` 且是实现了 `IGridProxyable` 的 AE 网格宿主时，该 GregTech 机器才会获得无线网络
 选择能力。普通 GregTech 机器和非 AE 仓室不会受到影响。
 
+## AppEU 兼容性
+
+Applied Energistics EU Network（AppEU）中的以下 ME 能源仓室均可作为无线端点：
+
+* 2A ME 能源仓与 ME 动力仓；
+* 4A、16A、64A ME 能源仓与 ME 动力仓；
+* 256A 及以上的 ME 激光靶仓与 ME 激光源仓。
+
+这些仓室可以使用下方的网络选择界面，也支持无线连接工具主手右键绑定及 Backhand 副手放置时自动绑定。无线连接只替代
+仓室到目标 ME 网络的线缆路径，不会改变 AppEU 原有的电压、安培数、EU 缓冲或传输周期。
+
+普通与多安 AppEU 仓室没有物品栏，右键时会直接打开无线网络选择器。ME 激光靶仓与 ME 激光源仓保留原有专用界面，并通过
+右下角的无线网络按钮打开选择器。
+
 对于具有 ModularUI2 界面的兼容仓室，无线网络按钮会出现在右下角控件流中。点击其连接器图标会打开与
 [ME 无线连接器](wireless_connector.md)相同的选择界面。自身没有机器界面的兼容仓室会在右键时直接打开选择界面。
 
