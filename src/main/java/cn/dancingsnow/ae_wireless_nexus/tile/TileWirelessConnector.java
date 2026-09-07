@@ -47,6 +47,7 @@ public class TileWirelessConnector extends AENetworkTile implements IGuiHolder<P
     private int priority;
     private int requestedChannels;
     private WirelessLeaseStatus leaseStatus = WirelessLeaseStatus.UNBOUND;
+    private boolean connectionFailureLogged;
 
     @Override
     protected AENetworkProxy createProxy() {
@@ -164,8 +165,13 @@ public class TileWirelessConnector extends AENetworkTile implements IGuiHolder<P
             return;
         }
         if (remoteConnection != null) {
-            leaseStatus = WirelessLeaseStatus.CONNECTED;
-            return;
+            if (isConnectionAlive()) {
+                leaseStatus = WirelessLeaseStatus.CONNECTED;
+                return;
+            }
+            // The AE2 side already tore this connection down (controller chunk unload, grid
+            // split, security break, ...). Drop the stale reference and reconnect below.
+            remoteConnection = null;
         }
         try {
             IGridNode source = getWirelessGridNode();
@@ -175,10 +181,22 @@ public class TileWirelessConnector extends AENetworkTile implements IGuiHolder<P
                 remoteConnection = AEApi.instance()
                     .createGridConnection(source, target);
                 leaseStatus = WirelessLeaseStatus.CONNECTED;
+                connectionFailureLogged = false;
             }
-        } catch (FailedConnection ignored) {
+        } catch (FailedConnection e) {
+            if (!connectionFailureLogged) {
+                connectionFailureLogged = true;
+                AEWirelessNexus.LOG
+                    .warn("Wireless connector {} failed to create grid connection: {}", getStableEndpointKey(), e);
+            }
             leaseStatus = WirelessLeaseStatus.CONNECTING;
         }
+    }
+
+    private boolean isConnectionAlive() {
+        IGridNode node = getWirelessGridNode();
+        return node != null && node.getConnections()
+            .contains(remoteConnection);
     }
 
     private void destroyRemoteConnection() {
@@ -186,6 +204,7 @@ public class TileWirelessConnector extends AENetworkTile implements IGuiHolder<P
             remoteConnection.destroy();
             remoteConnection = null;
         }
+        connectionFailureLogged = false;
     }
 
     @TileEvent(TileEventType.TICK)

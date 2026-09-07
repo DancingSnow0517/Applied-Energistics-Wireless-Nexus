@@ -14,6 +14,7 @@ import appeng.api.networking.IGridConnection;
 import appeng.api.networking.IGridNode;
 import appeng.core.worlddata.WorldData;
 import appeng.me.helpers.IGridProxyable;
+import cn.dancingsnow.ae_wireless_nexus.AEWirelessNexus;
 import cn.dancingsnow.ae_wireless_nexus.network.TileWirelessControllerRef;
 import cn.dancingsnow.ae_wireless_nexus.network.WirelessBindableEndpoint;
 import cn.dancingsnow.ae_wireless_nexus.network.WirelessChannelUsage;
@@ -32,6 +33,7 @@ public final class GTWirelessEndpoint implements WirelessBindableEndpoint {
     private int requestedChannels;
     private WirelessLeaseStatus status = WirelessLeaseStatus.UNBOUND;
     private IGridConnection remoteConnection;
+    private boolean connectionFailureLogged;
 
     public GTWirelessEndpoint(IGregTechTileEntity base) {
         this.base = base;
@@ -159,8 +161,13 @@ public final class GTWirelessEndpoint implements WirelessBindableEndpoint {
             return;
         }
         if (remoteConnection != null) {
-            this.status = WirelessLeaseStatus.CONNECTED;
-            return;
+            if (isConnectionAlive()) {
+                this.status = WirelessLeaseStatus.CONNECTED;
+                return;
+            }
+            // The AE2 side already tore this connection down (controller chunk unload, grid
+            // split, security break, ...). Drop the stale reference and reconnect below.
+            remoteConnection = null;
         }
         try {
             IGridNode source = getWirelessGridNode();
@@ -170,10 +177,22 @@ public final class GTWirelessEndpoint implements WirelessBindableEndpoint {
                 remoteConnection = AEApi.instance()
                     .createGridConnection(source, target);
                 this.status = WirelessLeaseStatus.CONNECTED;
+                connectionFailureLogged = false;
             }
-        } catch (FailedConnection ignored) {
+        } catch (FailedConnection e) {
+            if (!connectionFailureLogged) {
+                connectionFailureLogged = true;
+                AEWirelessNexus.LOG
+                    .warn("Wireless endpoint {} failed to create grid connection: {}", getStableEndpointKey(), e);
+            }
             this.status = WirelessLeaseStatus.CONNECTING;
         }
+    }
+
+    private boolean isConnectionAlive() {
+        IGridNode node = getWirelessGridNode();
+        return node != null && node.getConnections()
+            .contains(remoteConnection);
     }
 
     public void tick(long tick) {
@@ -210,5 +229,6 @@ public final class GTWirelessEndpoint implements WirelessBindableEndpoint {
             remoteConnection.destroy();
             remoteConnection = null;
         }
+        connectionFailureLogged = false;
     }
 }
