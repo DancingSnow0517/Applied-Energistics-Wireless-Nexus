@@ -72,6 +72,13 @@ public final class WirelessNetworkToolBinding {
         return getNetworkId(tool) != null;
     }
 
+    public static boolean unbindEndpoint(WirelessBindableEndpoint endpoint, EntityPlayer player) {
+        if (endpoint == null || player == null || endpoint.getTargetNetworkId() == null) return false;
+        endpoint.unbindFromNetwork();
+        notifyPlayer(player, "message.ae_wireless_nexus.wireless_kit.disconnected", endpoint.getEndpointDisplayName());
+        return true;
+    }
+
     public static String getNetworkDisplayName(ItemStack tool) {
         UUID networkId = getNetworkId(tool);
         if (networkId == null) return "";

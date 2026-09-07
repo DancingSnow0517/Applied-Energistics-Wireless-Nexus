@@ -70,10 +70,15 @@ public abstract class MixinBaseMetaTileEntity implements IGTWirelessHost {
         float aZ, CallbackInfoReturnable<Boolean> cir) {
         IGregTechTileEntity base = (IGregTechTileEntity) (Object) this;
         ItemStack heldItem = aPlayer.getHeldItem();
-        if (!GTWirelessEndpoint.isEligible(base) || !WirelessNetworkToolBinding.hasBinding(heldItem)) return;
+        if (!GTWirelessEndpoint.isEligible(base) || !WirelessNetworkToolBinding.isWirelessKit(heldItem)) return;
+        if (!aPlayer.isSneaking() && !WirelessNetworkToolBinding.hasBinding(heldItem)) return;
 
         if (base.isServerSide()) {
-            WirelessNetworkToolBinding.bindConnector(heldItem, aeWirelessNexus$getWirelessEndpoint(), aPlayer);
+            if (aPlayer.isSneaking()) {
+                WirelessNetworkToolBinding.unbindEndpoint(aeWirelessNexus$getWirelessEndpoint(), aPlayer);
+            } else {
+                WirelessNetworkToolBinding.bindConnector(heldItem, aeWirelessNexus$getWirelessEndpoint(), aPlayer);
+            }
         }
         cir.setReturnValue(true);
     }

@@ -37,6 +37,12 @@ public class BlockWirelessConnector extends BlockContainer {
         TileEntity tile = world.getTileEntity(x, y, z);
         if (!(tile instanceof TileWirelessConnector)) return false;
         ItemStack heldItem = player.getHeldItem();
+        if (WirelessNetworkToolBinding.isWirelessKit(heldItem) && player.isSneaking()) {
+            if (!world.isRemote) {
+                WirelessNetworkToolBinding.unbindEndpoint((TileWirelessConnector) tile, player);
+            }
+            return true;
+        }
         if (WirelessNetworkToolBinding.hasBinding(heldItem)) {
             if (!world.isRemote) {
                 WirelessNetworkToolBinding.bindConnector(heldItem, (TileWirelessConnector) tile, player);

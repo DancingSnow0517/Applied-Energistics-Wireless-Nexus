@@ -10,10 +10,13 @@ public final class WirelessKitTooltipHandler {
 
     @SubscribeEvent
     public void onItemTooltip(ItemTooltipEvent event) {
-        if (!WirelessNetworkToolBinding.hasBinding(event.itemStack)) return;
-        event.toolTip.add(
-            StatCollector.translateToLocalFormatted(
-                "tooltip.ae_wireless_nexus.wireless_kit.bound_network",
-                WirelessNetworkToolBinding.getNetworkDisplayName(event.itemStack)));
+        if (!WirelessNetworkToolBinding.isWirelessKit(event.itemStack)) return;
+        if (WirelessNetworkToolBinding.hasBinding(event.itemStack)) {
+            event.toolTip.add(
+                StatCollector.translateToLocalFormatted(
+                    "tooltip.ae_wireless_nexus.wireless_kit.bound_network",
+                    WirelessNetworkToolBinding.getNetworkDisplayName(event.itemStack)));
+        }
+        event.toolTip.add(StatCollector.translateToLocal("tooltip.ae_wireless_nexus.wireless_kit.sneak_unbind"));
     }
 }

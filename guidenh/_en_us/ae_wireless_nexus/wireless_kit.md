@@ -49,6 +49,14 @@ name, so GregTech hatches are identified by their own machine name.
 Binding also requires **Build** permission on the selected ME network. If the permission check fails, the endpoint is
 not rebound.
 
+## Disconnect an Endpoint
+
+Hold the Wireless Kit (no stored network required) and **sneak-right-click** a bound endpoint to disconnect it from
+its wireless network. Nothing happens if the endpoint is not bound.
+
+Use this when the endpoint's network selector is unavailable, for example when a GregTech addon rewrites a hatch GUI
+and the selector button is no longer shown.
+
 ## Bind While Placing
 
 Put a bound Wireless Kit in the Backhand offhand slot, then place an ME Wireless Connector or a compatible GregTech ME
