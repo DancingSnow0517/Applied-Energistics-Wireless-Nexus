@@ -49,6 +49,8 @@ dependencies {
     compileOnly("curse.maven:rotarycraft-235596:4721191")
 
     runtimeOnlyNonPublishable(gtnh290.angelica) { artifact { classifier = "dev" } }
+    // GTNH's launcher supplies fastutil; Gradle's development runs need it explicitly.
+    runtimeOnlyNonPublishable("it.unimi.dsi:fastutil:8.5.18")
 
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
